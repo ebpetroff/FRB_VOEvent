@@ -1,0 +1,77 @@
+A sample detection
+
+<?xml version='1.0' encoding='UTF-8'?>
+<voe:VOEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0" xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0 http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" version="2.0" role="observation" ivorn="ivo://atnf.csiro.au/parkes#FRB1405141714/0000">
+    <Who>
+    	<AuthorIVORN>ivo://atnf.csiro.au/contact</AuthorIVORN>
+    	<Date>2014-05-14T17:15:09</Date>
+    	<Author><contactEmail>ebpetroff@gmail.com</contactEmail><contactName>Emily Petroff</contactName></Author>
+    </Who>
+        <What>
+        <Group name="observatory parameters">
+            <Param dataType="float" name="beam_semi-major_axis" ucd="instr.beam;pos.errorEllipse;phys.angSize.smajAxis" unit="MM" value="15.0"/>
+            <Param dataType="float" name="beam_semi-minor_axis" ucd="instr.beam;pos.errorEllipse;phys.angSize.sminAxis" unit="MM" value="15.0"/>
+            <Param dataType="float" name="beam_rotation_angle" ucd="instr.beam;pos.errorEllipse;instr.offset" unit="Degrees" value="0.0"/>
+    	    <Param dataType="float" name="sampling_time" ucd="time.resolution" unit="ms" value="0.064"/>
+    	    <Param dataType="float" name="bandwidth" ucd="instr.bandwidth" unit="MHz" value="338.281"/>
+    	    <Param dataType="float" name="centre_frequency" ucd="em.freq;instr" unit="MHz" value="1352"/> 
+    	    <Param dataType="int" name="npol" unit="-" value="2"/>
+    	    <Param dataType="int" name="bits_per_sample" unit="-" value="2"/>
+    	    <Param dataType="float" name="gain" unit="K/Jy" value="0.735"/>
+    	    <Param dataType="float" name="tsys" ucd="phot.antennaTemp" unit="K" value="28.0"/>
+    	    <Param name="backend" value="BPSR"/>
+    	    <Param name="beam" value="1"/><Description>Detection beam number if backend is a multi beam receiver</Description> 
+        </Group>
+        <Group name="event parameters">
+    	    <Param dataType="float" name="dm" ucd="phys.dispMeasure;em.radio.750-1500MHz" unit="pc/cm^3" value="563.5"/>
+    	    <Param dataType="float" name="dm_error" ucd="stat.error;phys.dispMeasure" unit="pc/cm^3" value="1.0"/>
+    	    <Param dataType="float" name="width" ucd="time.duration;src.var.pulse" unit="ms" value="4.0"/>
+    	    <Param dataType="float" name="snr" ucd="stat.snr" value="16.3"/>
+    	    <Param dataType="float" name="flux" ucd="phot.flux" unit="Jy" value=""/>
+    	    <Param dataType="float" name="Broadening" ucd="time.duration;src.var.pulse;spect.line.broadening" unit="ms" value="None"><Description>NOTE: if Broadening = None this means no evidence could be found for broadening or it has NOT been calculated</Description></Param>
+    	    <Param dataType="float" name="gl" ucd="pos.galactic.lon" unit="Degrees" value="50.841"/>
+    	    <Param dataType="float" name="gb" ucd="pos.galactic.lat" unit="Degrees" value="-54.612"/>
+        </Group>
+        <Group name="advanced parameters">
+    	    <Param dataType="float" name="ne2001_dm_limit" unit="pc/cm^3" value="34.9"/>
+    	    <Param dataType="float" name="redshift" ucd="src.redshift" unit="None" value="0.44"><Description>Inferred redshift from DM excess</Description></Param>
+    	    <Param dataType="float" name="dm_index" unit="None" value=""><Description>Dispersion measure index</Description></Param>
+    	    <Param dataType="float" name="dm_index_error" unit="None" value=""><Description>Dispersion measure index error</Description></Param>
+    	    <Param dataType="float" name="scattering" unit="None" value=""><Description>Scattering timescale at 1 GHz</Description></Param>
+    	    <Param dataType="float" name="scatter_index" unit="None" value=""><Description>Scatter index</Description></Param>
+    	    <Param dataType="float" name="scatter_index_error" unit="None" value=""><Description>Scatter index error</Description></Param>
+    	    <Param dataType="float" name="spectral_index" unit="None" value=""><Description>Spectral index</Description></Param>
+    	    <Param dataType="float" name="spectral_index_error" unit="None" value=""><Description>Spectral index error</Description></Param>
+    	    <Param dataType="float" name="width_error_upper" ucd="stat.error;src.var.pulse;stat.max" unit="ms" value=""/>
+    	    <Param dataType="float" name="width_error_lower" udc="stat.error;src.var.pulse;stat.min" unit="ms" value=""/>
+    	    <Param dataType="float" name="flux_error_upper" ucd="stat.error;phot.flux;stat.max" unit="Jy" value=""/>
+    	    <Param dataType="float" name="flux_error_lower" ucd="stat.error;phot.flux;stat.min" unit="Jy" value=""/>
+    	    <Param dataType="float" name="fluence" ucd="phot.fluence" unit="Jy ms" value=""/>
+    	    <Param dataType="float" name="fluence_error_upper" ucd="stat.error;phot.fluence;stat.max" unit="Jy ms" value=""/>
+    	    <Param dataType="float" name="fluence_error_lower" ucd="stat.error;phot.fluence;stat.min" unit="Jy ms" value=""/>
+    	    <Param dataType="float" name="linear_pol" ucd="phys.polarization.linear" unit="None" value=""/>
+    	    <Param dataType="float" name="linear_pol_error" ucd="stat.error;phys.polarization.linear" unit="None" value=""/>
+    	    <Param dataType="float" name="circular_pol" ucd="phys.polarization.circular" unit="None" value=""/>
+    	    <Param dataType="float" name="circular_pol_error" ucd="stat.error;phys.polarization.circular" unit="None" value=""/>
+    	    <Param dataType="float" name="rm" ucd="phys.polarization.rotMeasure" unit="rad/m^2" value=""/>
+    	    <Param dataType="float" name="rm_error" ucd="stat.error;phys.polarization.rotMeasure" unit="rad/m^2" value=""/>
+    	</Group>
+    </What>
+    <WhereWhen>
+    	<ObsDataLocation>
+    	    <ObservatoryLocation id="Parkes"/><ObservationLocation>
+    	        <AstroCoordSystem id="UTC-FK5-GEO"/><AstroCoords coord_system_id="UTC-FK5-GEO">
+    	        <Time unit="s"><TimeInstant><ISOTime>2014-05-14T17:14:09.060000</ISOTime></TimeInstant></Time>
+    	        <Position2D unit="deg"><Name1>RA</Name1><Name2>Dec</Name2><Value2><C1>19.114</C1><C2>-39.379</C2></Value2><Error2Radius>0.125</Error2Radius></Position2D>
+    	        </AstroCoords>
+    	   </ObservationLocation>
+        </ObsDataLocation>
+    </WhereWhen>
+    <How>
+        <Description>PID871</Description>
+        <Description>DM_FRB>16*DM_NE2001</Description>
+	</How>
+    <Why importance="1.0">
+	        <Concept></Concept><Description>Detection of a new FRB</Description>
+    </Why>
+</voe:VOEvent>
