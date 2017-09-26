@@ -1,0 +1,103 @@
+A Sample VOEvent
+Emily Petroff & Leon Houben
+
+<?xml version='1.0' encoding='UTF-8'?>
+<voe:VOEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0" xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0 http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" version="2.0" role="utility" ivorn="ivo://[institute]/[instrument]#OBS[YYMMDDhhmm]/[MJD]"> <!-- MJD of VOEvent creation -->
+    <Who>
+    	<AuthorIVORN>ivo://[institute]/contact</AuthorIVORN>
+    	<Date>[YYYY-MM-DDThh:mm:ss]</Date> <!-- Time of event creation -->
+    	<Author><contactEmail>[E-mail]</contactEmail><contactName>[Name]</contactName></Author>
+    </Who>
+    <What>
+        <Group name="observatory parameters">
+            <Param dataType="float" name="beam_semi-major_axis" ucd="instr.beam;pos.errorEllipse;phys.angSize.smajAxis" unit="MM" value=""/>
+            <Param dataType="float" name="beam_semi-minor_axis" ucd="instr.beam;pos.errorEllipse;phys.angSize.sminAxis" unit="MM" value=""/>
+            <Param dataType="float" name="beam_rotation_angle" ucd="instr.beam;pos.errorEllipse;instr.offset" unit="Degrees" value=""/>
+    	    <Param dataType="float" name="sampling_time" ucd="time.resolution" unit="ms" value=""/>
+    	    <Param dataType="float" name="bandwidth" ucd="instr.bandwidth" unit="MHz" value=""/>
+    	    <Param dataType="float" name="nchan" ucd="meta.number;em.freq;em.bin" unit="None" value=""/>
+    	    <Param dataType="float" name="centre_frequency" ucd="em.freq;instr" unit="MHz" value=""/>
+    	    <Param dataType="int" name="npol" unit="None" value=""/>
+    	    <Param dataType="int" name="bits_per_sample" unit="None" value=""/>
+    	    <Param dataType="float" name="gain" unit="K/Jy" value=""/>
+    	    <Param dataType="float" name="tsys" ucd="phot.antennaTemp" unit="K" value=""/>
+    	    <Param name="backend" value=""/>
+    	    <Param name="beam" value=""><Description>Detection beam number if backend is a multi beam receiver</Description></Param>
+        </Group>
+        <Group name="observation parameters">
+            <Param dataType="float" name="observation_start_MJD" ucd="obs.param;time.start" unit="MJD" value=""/>
+            <Param dataType="float" name="observation_end_MJD" ucd="obs.param;time.end" unit="MJD" value=""/>
+            <Param dataType="float" name="observation_duration" ucd="obs.param;time.duration" unit="s" value=""/>
+            <!-- Boresight celestial position of telescope -->
+            <Param dataType="float" name="observation_RA" ucd="obs.param;pos.eq.ra" unit="Degrees" value=""/>
+            <Param dataType="float" name="observation_DEC" ucd="obs.param;pos.eq.dec" unit="Degrees" value=""/>
+            <!-- Param name="target_name" value=""/><Description>The name of the planned target for the follow-up observation. If no VOEvent citation exists for this event, provide the DOI of the FRB publication.</Description -->
+            <Param name="scan_type" value=""/><Description>Fixed or drift scan performed?</Description>
+        </Group>
+        <!--
+        <Group name="event parameters">
+    	    <Param dataType="float" name="dm" ucd="phys.dispMeasure" unit="pc/cm^3" value=""/>
+    	    <Param dataType="float" name="dm_error" ucd="stat.error;phys.dispMeasure" unit="pc/cm^3" value=""/>
+    	    <Param dataType="float" name="width" ucd="time.duration;src.var.pulse" unit="ms" value=""/>
+    	    <Param dataType="float" name="snr" ucd="stat.snr" value=""/>
+    	    <Param dataType="float" name="flux" ucd="phot.flux" unit="Jy" value=""/>
+    	    <Param dataType="float" name="gl" ucd="pos.galactic.lon" unit="Degrees" value=""/>
+    	    <Param dataType="float" name="gb" ucd="pos.galactic.lat" unit="Degrees" value=""/>
+    	    <Param dataType="float" name="dispersion_smearing" unit="ms" value=""/>
+        </Group>
+        <Group name="advanced parameters">
+    	    <Param dataType="float" name="MW_dm_limit" unit="pc/cm^3" value=""/>
+    	    <Param name="galactic_electron_model" value=""/><Description>[In case "other": give DOI or discription of model used]</Description> <!-- Galactic electron model used for MW_dm_limit and redshift calculation. Value is any of the following options: "NE2001", "TC93", "YMW16", "other" --><!--
+            <Param dataType="float" name="redshift_inferred" ucd="src.redshift" unit="None" value=""><Description>The inferred redshift estimated based on e.g. the dispersion measure. Specify method of calculation.</Description></Param>
+            <Param dataType="float" name="redshift_host" ucd="src.redshift" unit="None" value=""><Description>The redshift of the FRB host galaxy. Specify "photometry" or "spectroscopy".</Description></Param>
+    	    <Param dataType="float" name="dispersion_smearing" unit="ms" value=""/>
+    	    <Param dataType="float" name="scattering" ucd="time.duration;src.var.pulse;spect.line.broadening" unit="ms" value=""><Description>The scatter broadening of the pulse. NOTE: if scattering = None this means either no evidence could be found for scatter broadening or it has NOT been calculated</Description></Param>
+    	    <Param name="scattering_model" value=""/><Description>[In case "other": give DOI or discription of model used]</Description> <!-- Scattering screen model used to measure scattering parameter. Value is any of the following options: "one-sided exponential"(standard), "Kolmogorov thin screen", "Kolmogorov uniform medium", "Kolmogorov thin-screen truncated", "Power law thin", "Power law thick", "other" --><!--
+    	    <Param dataType="float" name="dm_index" unit="None" value=""><Description>Dispersion measure index</Description></Param>
+    	    <Param dataType="float" name="dm_index_error" unit="None" value=""><Description>Dispersion measure index error</Description></Param>
+    	    <Param dataType="float" name="scattering_timescale" unit="ms" value=""><Description>Scattering timescale at 1 GHz</Description></Param>
+    	    <Param dataType="float" name="scatter_index" unit="None" value=""><Description>Scatter index</Description></Param>
+    	    <Param dataType="float" name="scatter_index_error" unit="None" value=""><Description>Scatter index error</Description></Param>
+    	    <Param dataType="float" name="spectral_index" unit="None" value=""><Description>Spectral index</Description></Param>
+    	    <Param dataType="float" name="spectral_index_error" unit="None" value=""><Description>Spectral index error</Description></Param>
+    	    <Param dataType="float" name="width_error_upper" ucd="stat.error;src.var.pulse;stat.max" unit="ms" value=""/>
+    	    <Param dataType="float" name="width_error_lower" ucd="stat.error;src.var.pulse;stat.min" unit="ms" value=""/>
+    	    <Param dataType="float" name="flux_calibrated" ucd="phot.flux" unit="Jy" value=""/><Description>[How calibrated]</Description>
+    	    <Param dataType="float" name="flux_error_upper" ucd="stat.error;phot.flux;stat.max" unit="Jy" value=""/>
+    	    <Param dataType="float" name="flux_error_lower" ucd="stat.error;phot.flux;stat.min" unit="Jy" value=""/>
+    	    <Param dataType="float" name="fluence" ucd="phot.fluence" unit="Jy ms" value=""/>
+    	    <Param dataType="float" name="fluence_error_upper" ucd="stat.error;phot.fluence;stat.max" unit="Jy ms" value=""/>
+    	    <Param dataType="float" name="fluence_error_lower" ucd="stat.error;phot.fluence;stat.min" unit="Jy ms" value=""/>
+    	    <Param dataType="float" name="linear_pol" ucd="phys.polarization.linear" unit="None" value=""/>
+    	    <Param dataType="float" name="linear_pol_error" ucd="stat.error;phys.polarization.linear" unit="None" value=""/>
+    	    <Param dataType="float" name="circular_pol" ucd="phys.polarization.circular" unit="None" value=""/>
+    	    <Param dataType="float" name="circular_pol_error" ucd="stat.error;phys.polarization.circular" unit="None" value=""/>
+    	    <Param dataType="float" name="rm" ucd="phys.polarization.rotMeasure" unit="rad/m^2" value=""/>
+    	    <Param dataType="float" name="rm_error" ucd="stat.error;phys.polarization.rotMeasure" unit="rad/m^2" value=""/>
+        </Group>
+        -->
+    </What>
+    <WhereWhen>
+    	<ObsDataLocation>
+    	    <ObservatoryLocation id="[Instrument location]"/><ObservationLocation>
+    	        <AstroCoordSystem id="UTC-FK5-GEO"/><AstroCoords coord_system_id="UTC-FK5-GEO">
+    	        <Time unit="s"><TimeInstant><ISOTime>[YYYY-MM-DDThh:mm:ss.ssssss]</ISOTime></TimeInstant></Time> <!-- Time of start observation -->
+    	        <Position2D unit="deg"><Name1>RA</Name1><Name2>Dec</Name2><Value2><C1>[RA in degrees]</C1><C2>[DEC in degrees]</C2></Value2><Error2Radius>[Position error in degrees]</Error2Radius></Position2D> <!-- Coordinates of FoV center at start observation -->
+    	        </AstroCoords>
+    	   </ObservationLocation>
+        </ObsDataLocation>
+    </WhereWhen>
+    <!--
+    <How>
+    	<Description>[Possible instrument details]</Description><Reference uri="[Link to external webpage about instrument]"/>
+    	<Description>[Data]</Description><Reference uri="[Possible link to data (download)]"/>
+	</How>
+	-->
+	<Why importance="None">
+	    <Concept>[Flag that importance corresponds to]</Concept><Description>[Elaboration on flag criteria]</Description>
+	</Why>
+	<Citations>
+	    <EventIVORN cite="[citation relation]">[EventIVORN this event refers to]</EventIVORN>
+	    <Description>[Relation to the cited event]</Description>
+	</Citations>
+</voe:VOEvent>

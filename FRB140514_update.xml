@@ -1,9 +1,9 @@
 A sample update
 
 <?xml version='1.0' encoding='UTF-8'?>
-<voe:VOEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0" xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0 http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" version="2.0" role="utility" ivorn="ivo://nl.astron/apertif#FRB1405141714/0001">
+<voe:VOEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0" xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0 http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" version="2.0" role="utility" ivorn="ivo://au.csiro.atnf/parkes#FRB1405141714/57764.61250000">
     <Who>
-    	<AuthorIVORN>ivo://nl.astron/contact</AuthorIVORN>
+    	<AuthorIVORN>ivo://au.csiro.atnf/contact</AuthorIVORN>
     	<Date>2017-01-11T14:42:00</Date>
     	<Author><contactEmail>petroff@astron.nl</contactEmail><contactName>Emily Petroff</contactName></Author>
     </Who>
@@ -14,6 +14,7 @@ A sample update
             <Param dataType="float" name="beam_rotation_angle" ucd="instr.beam;pos.errorEllipse;instr.offset" unit="Degrees" value="0.0"/>
     	    <Param dataType="float" name="sampling_time" ucd="time.resolution" unit="ms" value="0.064"/>
     	    <Param dataType="float" name="bandwidth" ucd="instr.bandwidth" unit="MHz" value="338.281"/>
+            <Param dataType="float" name="nchan" ucd="meta.number;em.freq;em.bin" unit="None" value="866"/>
     	    <Param dataType="float" name="centre_frequency" ucd="em.freq;instr" unit="MHz" value="1352"/> 
     	    <Param dataType="int" name="npol" unit="-" value="2"/>
     	    <Param dataType="int" name="bits_per_sample" unit="-" value="2"/>
@@ -28,20 +29,16 @@ A sample update
     	    <Param dataType="float" name="width" ucd="time.duration;src.var.pulse" unit="ms" value="2.8"/>
     	    <Param dataType="float" name="snr" ucd="stat.snr" value="16"/>
     	    <Param dataType="float" name="flux" ucd="phot.flux" unit="Jy" value="0.47"/>
-    	    <Param dataType="float" name="Broadening" ucd="time.duration;src.var.pulse;spect.line.broadening" unit="ms" value="None"><Description>NOTE: if Broadening = None this means no evidence could be found for broadening or it has NOT been calculated</Description></Param>
     	    <Param dataType="float" name="gl" ucd="pos.galactic.lon" unit="Degrees" value="50.841"/>
     	    <Param dataType="float" name="gb" ucd="pos.galactic.lat" unit="Degrees" value="-54.612"/>
         </Group>
         <Group name="advanced parameters">
-    	    <Param dataType="float" name="ne2001_dm_limit" unit="pc/cm^3" value="34.9"/>
-    	    <Param dataType="float" name="redshift" ucd="src.redshift" unit="None" value="0.44"><Description>Inferred redshift from DM excess</Description></Param>
+    	    <Param dataType="float" name="MW_dm_limit" unit="pc/cm^3" value="34.9"/>
+            <Param name="galactic_electron_model" value="NE2001"/>
+    	    <Param dataType="float" name="redshift_inferred" ucd="src.redshift" unit="None" value="0.44"><Description>Inferred redshift from NE2001 DM excess.</Description></Param>
     	    <Param dataType="float" name="dm_index" unit="None" value="2.000"><Description>Dispersion measure index</Description></Param>
     	    <Param dataType="float" name="dm_index_error" unit="None" value="0.004"><Description>Dispersion measure index error</Description></Param>
     	    <Param dataType="float" name="scattering" unit="None" value="5.4"><Description>Scattering timescale at 1 GHz</Description></Param>
-    	    <Param dataType="float" name="scatter_index" unit="None" value=""><Description>Scatter index</Description></Param>
-    	    <Param dataType="float" name="scatter_index_error" unit="None" value=""><Description>Scatter index error</Description></Param>
-    	    <Param dataType="float" name="spectral_index" unit="None" value=""><Description>Spectral index</Description></Param>
-    	    <Param dataType="float" name="spectral_index_error" unit="None" value=""><Description>Spectral index error</Description></Param>
     	    <Param dataType="float" name="width_error_upper" ucd="stat.error;src.var.pulse;stat.max" unit="ms" value="3.5"/>
     	    <Param dataType="float" name="width_error_lower" udc="stat.error;src.var.pulse;stat.min" unit="ms" value="0.7"/>
     	    <Param dataType="float" name="flux_error_upper" ucd="stat.error;phot.flux;stat.max" unit="Jy" value="0.11"/>
@@ -53,29 +50,39 @@ A sample update
     	    <Param dataType="float" name="linear_pol_error" ucd="stat.error;phys.polarization.linear" unit="None" value="10.0"/>
     	    <Param dataType="float" name="circular_pol" ucd="phys.polarization.circular" unit="None" value="21.0"/>
     	    <Param dataType="float" name="circular_pol_error" ucd="stat.error;phys.polarization.circular" unit="None" value="7.0"/>
-    	    <Param dataType="float" name="rm" ucd="phys.polarization.rotMeasure" unit="rad/m^2" value="None"/>
-    	    <Param dataType="float" name="rm_error" ucd="stat.error;phys.polarization.rotMeasure" unit="rad/m^2" value="None"/>
     	</Group>
     </What>
     <WhereWhen>
     	<ObsDataLocation>
-    	    <ObservatoryLocation id="pyfrbcat_test"/><ObservationLocation>
+    	    <ObservatoryLocation id="PARKES">
+          <AstroCoordSystem id="UTC-GEOD-TOPO"/>
+          <AstroCoords coord_system_id="UTC-GEOD-TOPO">
+            <Position3D unit="deg-deg-m">
+              <Value3>
+                <C1>148.2635101</C1>
+                <C2>-32.9984064</C2>
+                <C3>414.80</C3>
+                </Value3>
+            </Position3D>
+        </AstroCoords>
+            </ObservatoryLocation>
+            <ObservationLocation>
     	        <AstroCoordSystem id="UTC-FK5-GEO"/><AstroCoords coord_system_id="UTC-FK5-GEO">
-    	        <Time unit="s"><TimeInstant><ISOTime>2014-05-14T17:14:09.060000</ISOTime></TimeInstant></Time>
+    	        <Time unit="s"><TimeInstant><ISOTime>2014-05-14T17:14:11.060000</ISOTime></TimeInstant></Time>
     	        <Position2D unit="deg"><Name1>RA</Name1><Name2>Dec</Name2><Value2><C1>19.114</C1><C2>-39.379</C2></Value2><Error2Radius>0.125</Error2Radius></Position2D>
     	        </AstroCoords>
     	   </ObservationLocation>
         </ObsDataLocation>
     </WhereWhen>
     <How>
-    	<Description>pyfrbcat_test</Description><Reference uri="http://www.astronomy.swin.edu.au/pulsar/frbcat/view.php?id=9"/>
+    	<Description>Update to the Catalogue from published values.</Description><Reference url="http://adsabs.harvard.edu/abs/2015MNRAS.447..246P"/>
     	<Description>DM_FRB>16*DM_NE2001</Description>
 	</How>
     <Why importance="0.0">
 	        <Concept>frbcat update</Concept><Description>FRB140514 parameters updated</Description>
     </Why>
     <Citations>
-	    <EventIVORN cite="supersedes">ivo://atnf.csiro.au/parkes#FRB1405141714/0000</EventIVORN>
+	    <EventIVORN cite="supersedes">ivo://au.csiro.atnf/parkes#FRB1405141714/56791.71885417</EventIVORN>
 	    <Description>Updated source parameters</Description>
 	</Citations>
 </voe:VOEvent>
