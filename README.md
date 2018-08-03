@@ -5,7 +5,7 @@ In this repository you will find the most up-to-date information about FRB VOEve
 
 ## What is a VOEvent?
 
-A VOEvent is a communication standard developed by the Virtual Observatory to send information on short timescales about new astronomical events. A VOEvent is an xml schema that contains important/relevant information about a new event so that others around the world can follow up and take more data after the event has been reported. You can read more about the VOEvent concent [here](http://voevent.readthedocs.io/en/latest/#)
+A VOEvent is a communication standard developed by the Virtual Observatory to send information on short timescales about new astronomical events. A VOEvent is an xml schema that contains important/relevant information about a new event so that others around the world can follow up and take more data after the event has been reported. You can read more about the VOEvent concept [here](http://voevent.readthedocs.io/en/latest/#)
 
 A VOEvent contains a few different _elements_ to break up the information into a few different categories:
 * Who is issuing the event?
