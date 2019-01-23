@@ -23,10 +23,11 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, 
     v = vp.Voevent(stream='nl.astron.apertif/alert', stream_id=ivorn, role=vp.definitions.roles.observation)
     # Author origin information
     vp.set_who(v, date=datetime.datetime.utcnow(), author_ivorn="nl.astron")
-    vp.set_author(v, title="ASTRON ALERT FRB Detector", contactName="Emily Petroff", contactEmail="ebpetroff@gmail.com", shortName="ALERT")
+    # Author contact information
+    vp.set_author(v, title="ASTRON ALERT FRB Detector", contactName="Leon Oostrum", contactEmail="leonoostrum@gmail.com", shortName="ALERT")
     # Parameter definitions
 
-    #Apertif-specific observing configuration
+    #Apertif-specific observing configuration %%TODO: update parameters as necessary for new obs config
     beam_sMa = vp.Param(name="beam_semi-major_axis", unit="MM", ucd="instr.beam;pos.errorEllipse;phys.angSize.smajAxis", ac=True, value=semiMaj)
     beam_sma = vp.Param(name="beam_semi-minor_axis", unit="MM", ucd="instr.beam;pos.errorEllipse;phys.angSize.sminAxis", ac=True, value=semiMin)
     beam_rot = vp.Param(name="beam_rotation_angle", value=0.0, unit="Degrees", ucd="instr.beam;pos.errorEllipse;instr.offset", ac=True)
@@ -67,7 +68,7 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, 
     #WhereWhen
 
     vp.add_where_when(v, coords=vp.Position2D(ra=ra, dec=dec, err=errDeg, units='deg', system=vp.definitions.sky_coord_system.utc_fk5_geo),
-        obs_time=datetime.datetime(utc_YY,utc_MM,utc_DD,utc_hh,utc_mm,int(utc_ss), tzinfo=pytz.UTC), observatory_location="test")
+        obs_time=datetime.datetime(utc_YY,utc_MM,utc_DD,utc_hh,utc_mm,int(utc_ss), tzinfo=pytz.UTC), observatory_location="WSRT")
 
     #Why
     
@@ -76,7 +77,9 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, 
 
     if vp.valid_as_v2_0(v):
         with open('%s.xml' % name, 'wb') as f:
-            vp.dump(v, f)
+            voxml = vp.dumps(v)
+            xmlstr = minidom.parseString(voxml).toprettyxml(indent="   ")
+            f.write(xmlstr)
             print(vp.prettystr(v.Who))
             print(vp.prettystr(v.What))
             print(vp.prettystr(v.WhereWhen))
@@ -98,6 +101,7 @@ if __name__ == "__main__":
     import pytz
     import numpy as np
     import argparse
+    from xml.dom import minidom
 
     parser = argparse.ArgumentParser(description="Generates a VOEvent for an FRB detected with Apertif")
     parser.add_argument('--dm', type=float)
@@ -108,7 +112,7 @@ if __name__ == "__main__":
     parser.add_argument('--RA', type=float) #RA in degrees
     parser.add_argument('--DEC', type=float) #DEC in degrees
     parser.add_argument('--semiMaj', type=float, default=30.0) #Beam Semi-Major axis in arcminutes
-    parser.add_argument('--semiMin', type=float, default=0.416) #Beam Semi-Minor axis in arcminuts
+    parser.add_argument('--semiMin', type=float, default=0.416) #Beam Semi-Minor axis in arcminutes
     parser.add_argument('--NE2001', type=float)
     parser.add_argument('--name', default="FRB")
     parser.add_argument('--importance', type=float, default=0.0)
