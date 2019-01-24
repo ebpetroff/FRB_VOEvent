@@ -1,6 +1,6 @@
 
 
-def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, name, importance, utc, gl, gb): 
+def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ymw16, name, importance, utc, gl, gb): 
 
     z = dm/1200.0  #May change
     errDeg = semiMaj/60.0
@@ -46,7 +46,7 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, 
 
     #Event parameters
     DM = vp.Param(name="dm", ucd="phys.dispMeasure", unit="pc/cm^3", ac=True, value=dm )
-    DM_err = vp.Param(name="dm_err", ucd="stat.error;phys.dispMeasure", unit="pc/cm^3", ac=True, value=dm_err)
+#    DM_err = vp.Param(name="dm_err", ucd="stat.error;phys.dispMeasure", unit="pc/cm^3", ac=True, value=dm_err)
     Width = vp.Param(name="width", ucd="time.duration;src.var.pulse", unit="ms", ac=True, value=width)
     SNR = vp.Param(name="snr", ucd="stat.snr", unit="None", ac=True, value=snr)
     Flux = vp.Param(name="flux", ucd="phot.flux", unit="Jy", ac=True, value=flux)
@@ -54,11 +54,12 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, 
     Gl = vp.Param(name="gl", ucd="pos.galactic.lon", unit="Degrees", ac=True, value=gl)
     Gb = vp.Param(name="gb", ucd="pos.galactic.lat", unit="Degrees", ac=True, value=gb)
 
-    v.What.append(vp.Group(params=[DM, DM_err, Width, SNR, Flux, Gl, Gb], name="event parameters"))
+    v.What.append(vp.Group(params=[DM, Width, SNR, Flux, Gl, Gb], name="event parameters"))
+#    v.What.append(vp.Group(params=[DM, DM_err, Width, SNR, Flux, Gl, Gb], name="event parameters"))
 
     #Advanced parameters (note, change script if using a differeing MW model)
-    mw_dm = vp.Param(name="MW_dm_limit", unit="pc/cm^3", ac=True, value=ne2001)
-    mw_model = vp.Param(name="galactic_electron_model", value="NE2001")
+    mw_dm = vp.Param(name="MW_dm_limit", unit="pc/cm^3", ac=True, value=ymw16)
+    mw_model = vp.Param(name="galactic_electron_model", value="YMW16")
     redshift_inferred = vp.Param(name="redshift_inferred", ucd="src.redshift", unit="None", value=z)
     redshift_inferred.Description = "Redshift estimated using z = DM/1200.0 (Ioka 2003)"
 
@@ -76,7 +77,7 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, 
     v.Why.Name = name
 
     if vp.valid_as_v2_0(v):
-        with open('%s.xml' % name, 'wb') as f:
+        with open('%s.xml' % utc, 'wb') as f:
             voxml = vp.dumps(v)
             xmlstr = minidom.parseString(voxml).toprettyxml(indent="   ")
             f.write(xmlstr)
@@ -105,15 +106,15 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Generates a VOEvent for an FRB detected with Apertif")
     parser.add_argument('--dm', type=float)
-    parser.add_argument('--dm_err', type=float)
+    parser.add_argument('--dm_err', type=float, default=2.0)
     parser.add_argument('--width', type=float)
     parser.add_argument('--snr', type=float)
     parser.add_argument('--flux', type=float)
     parser.add_argument('--RA', type=float) #RA in degrees
     parser.add_argument('--DEC', type=float) #DEC in degrees
-    parser.add_argument('--semiMaj', type=float, default=30.0) #Beam Semi-Major axis in arcminutes
-    parser.add_argument('--semiMin', type=float, default=0.416) #Beam Semi-Minor axis in arcminutes
-    parser.add_argument('--NE2001', type=float)
+    parser.add_argument('--semiMaj', type=float, default=15.0) #Beam Semi-Major axis in arcminutes
+    parser.add_argument('--semiMin', type=float, default=15.0) #Beam Semi-Minor axis in arcminutes
+    parser.add_argument('--YMW16', type=float)
     parser.add_argument('--name', default="FRB")
     parser.add_argument('--importance', type=float, default=0.0)
     parser.add_argument('--utc', default="2018-01-01-00:00:00.0")
@@ -133,12 +134,12 @@ if __name__ == "__main__":
     dec = args.DEC
     semiMaj = args.semiMaj
     semiMin = args.semiMin
-    ne2001 = args.NE2001
+    ymw16 = args.YMW16
     name = args.name
     imp = args.importance
     utc = args.utc
 
-    print dm, dm_err, width, flux, ra, dec, semiMaj, semiMin, ne2001, name, imp, utc
+    print dm, dm_err, width, flux, ra, dec, semiMaj, semiMin, ymw16, name, imp, utc
 
     # Parse coordinates
     c = SkyCoord(ra=ra*u.degree, dec=dec*u.degree, frame='icrs')
@@ -150,4 +151,4 @@ if __name__ == "__main__":
     #print utc, utc_YY, utc_MM, utc_DD, utc_hh, utc_mm, utc_ss, mjd
 
 
-    NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ne2001, name, imp, utc, gl, gb)
+    NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ymw16, name, imp, utc, gl, gb)
