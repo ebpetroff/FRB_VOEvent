@@ -1,3 +1,17 @@
+    import astropy.coordinates as coord
+    import astropy.units as u
+    from astropy.io import ascii
+    from astropy.coordinates import SkyCoord
+    from astropy.time import Time
+    import voeventparse as vp
+    import datetime
+    import os
+    import sys
+    import pytz
+    import numpy as np
+    import argparse
+    from xml.dom import minidom
+
 
 
 def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ymw16, name, importance, utc, gl, gb): 
@@ -20,7 +34,8 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ymw16, n
    
     ivorn = ''.join([name, str(utc_hh), str(utc_mm), '/', str(mjd_now)]) 
 
-    v = vp.Voevent(stream='nl.astron.apertif/alert', stream_id=ivorn, role=vp.definitions.roles.observation)
+    v = vp.Voevent(stream='nl.astron.apertif/alert', stream_id=ivorn, role=vp.definitions.roles.test)
+ #   v = vp.Voevent(stream='nl.astron.apertif/alert', stream_id=ivorn, role=vp.definitions.roles.observation)
     # Author origin information
     vp.set_who(v, date=datetime.datetime.utcnow(), author_ivorn="nl.astron")
     # Author contact information
@@ -90,20 +105,6 @@ def NewVOEvent(dm, dm_err, width, snr, flux, ra, dec, semiMaj, semiMin, ymw16, n
 
 
 if __name__ == "__main__":
-    import astropy.coordinates as coord
-    import astropy.units as u
-    from astropy.io import ascii
-    from astropy.coordinates import SkyCoord
-    from astropy.time import Time
-    import voeventparse as vp
-    import datetime
-    import os
-    import sys
-    import pytz
-    import numpy as np
-    import argparse
-    from xml.dom import minidom
-
     parser = argparse.ArgumentParser(description="Generates a VOEvent for an FRB detected with Apertif")
     parser.add_argument('--dm', type=float)
     parser.add_argument('--dm_err', type=float, default=2.0)
