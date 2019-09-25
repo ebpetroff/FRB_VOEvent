@@ -39,13 +39,11 @@ The FRB Catalogue (FRBCAT) will very soon run a broker service which can receive
 
 To broadcast a VOEvent you will need a _broker_. We recommend the **Comet broker** which is commonly used for VOEvent communication. To avoid reinventing the wheel, we haven't included any Comet tutorials here, but instead refer you to [the excellent start up guide that already exists](https://comet.readthedocs.io/en/stable/usage/broker.html).
 
-To register as an author with the FRBCAT broker: (information to be added soon re: address, port, IP addresses, etc.)
+The FRBCAT VOEvent broker receives events at the port **phobos.astron.nl:8098**. Your IP address must be whitelisted for transmitted events to be parsed and processed. To register your IP address with the FRBCAT broker, please contact the administrator (Emily Petroff). Events received by the FRBCAT broker will be parsed and added to the Catalogue and will be re-broadcast from the broadcast port (see below).
 
 ## Receiving VOEvents from the FRBCAT Broker
 
-Initially, the FRBCAT broker will only receive events from and issue events to subscribed IP addresses from an approved list. To register your broker with the FRBCAT please follow these steps:
-
-(More information to come when the broker is up and running)
+The FRBCAT VOEvent broker broadcasts events at the port **phobos.astron.nl:8099** to any parties who subscribe. If you are interested in receiving these messages, please add this address to your broker's list of remote broadcasters to which it subscribes.
 
 ## Parsing a VOEvent
 
