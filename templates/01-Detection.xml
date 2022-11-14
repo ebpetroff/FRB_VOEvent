@@ -15,7 +15,7 @@ Emily Petroff & Leon Houben
             <Param dataType="float" name="beam_rotation_angle" ucd="instr.beam;pos.errorEllipse;instr.offset" unit="Degrees" value=""/>
     	    <Param dataType="float" name="sampling_time" ucd="time.resolution" unit="ms" value=""/>
     	    <Param dataType="float" name="bandwidth" ucd="instr.bandwidth" unit="MHz" value=""/>
-    	    <Param dataType="float" name="nchan" ucd="meta.number;em.freq;em.bin" unit="None" value=""/>
+    	    <Param dataType="int" name="nchan" ucd="meta.number;em.freq;em.bin" unit="None" value=""/>
     	    <Param dataType="float" name="centre_frequency" ucd="em.freq;instr" unit="MHz" value=""/>
     	    <Param dataType="int" name="npol" unit="None" value=""/>
     	    <Param dataType="int" name="bits_per_sample" unit="None" value=""/>
